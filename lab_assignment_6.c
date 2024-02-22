@@ -1,11 +1,26 @@
+/* 
+	Edited by Daniel Nunez
+	2/22/2024
+	CS1 Lab Assignment 6
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-int search(int numbers[], int low, int high, int value) 
-{
+int search(int numbers[], int low, int high, int value) {	//Binary search function
+	int middle;
+	if (low <= high) {
+		middle = (low + high) / 2;
+		if (value < numbers[middle]) {
+			return search(numbers, low, middle-1, value);
+		}	else if (value > numbers[middle]) {
+				return search(numbers, middle+1, high, value);
+		}	//Ends else-if statement
+		else return 1;
+	}	//Ends if statement
 	return -1;
-}
+}	//Ends search function
 
 void printArray(int numbers[], int sz)
 {
@@ -30,7 +45,7 @@ int main(void)
 	FILE* inFile = fopen("input.txt","r");
 
 	fscanf(inFile, " %d\n", &numInputs);
-	
+
 	while (numInputs-- > 0)
 	{
 		fscanf(inFile, " %d\n", &countOfNums);
